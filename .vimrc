@@ -121,8 +121,8 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_exclude_filetypes = ['nerdtree']
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd guibg=215 ctermbg=215
-hi IndentGuidesEven guibg=215 ctermbg=110
+hi IndentGuidesOdd ctermbg=215
+hi IndentGuidesEven ctermbg=110
 
 "========================================================================= 
 " Automatically store a file the way I like it.
