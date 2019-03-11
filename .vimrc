@@ -98,17 +98,6 @@ map <C-n> :NERDTreeToggle<Cr>
 " Replace    :e 
 let NERDTreeHijackNetrw=1
 
-
-"========================================================================= 
-" Indent guides
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g_indent_guides_auto_colors = 0
-let g:indent_guides_exclude_filetypes = ['nerdtree']
-hi IntentGuidesOdd ctermbg = 215
-hi IndentGuidesEven ctermbg = 110
-
 "========================================================================= 
 " Airline
 if !exists('g:airline_symbols')
@@ -125,6 +114,15 @@ let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='light'
 
+"========================================================================= 
+" Indent guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_exclude_filetypes = ['nerdtree']
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd guibg=215 ctermbg=215
+hi IndentGuidesEven guibg=215 ctermbg=110
 
 "========================================================================= 
 " Automatically store a file the way I like it.
@@ -149,12 +147,4 @@ set wildmenu
 " See <http://vim.wikia.com/wiki/Using_command-line_history>
 "
 :autocmd CmdwinEnter * nnoremap <buffer> <F5> :let g:CmdWindowLineMark=line(".")<CR><CR>g::execute "normal ".g:CmdWindowLineMark."G"<CR>
-
-
-
-
-
-
-
-
 
