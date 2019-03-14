@@ -7,6 +7,7 @@ execute pathogen#infect()
 
 "Enable VIM features
 set nocompatible
+Helptags
 
 set encoding=utf-8
 
@@ -97,6 +98,13 @@ set listchars=tab:>.,trail:.
 map <C-n> :NERDTreeToggle<Cr>
 " Replace    :e 
 let NERDTreeHijackNetrw=1
+" Automatically open NERDTree when no command line argument is given
+function! StartupNerdTree()
+    if 0 == argc()
+        NERDTree
+    end
+endfunction
+autocmd VimEnter * call StartupNerdTree()
 
 "========================================================================= 
 " Airline
@@ -121,8 +129,8 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_exclude_filetypes = ['nerdtree']
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd guibg=215 ctermbg=215
-hi IndentGuidesEven guibg=215 ctermbg=110
+hi IndentGuidesOdd ctermbg=215
+hi IndentGuidesEven ctermbg=110
 
 "========================================================================= 
 " Automatically store a file the way I like it.
