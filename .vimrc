@@ -21,7 +21,7 @@ syntax enable
 " Use 256 colors
 set t_Co=256
 
-set background=light
+set background=dark
 colorscheme PaperColor
 
 "=========================================================================
@@ -33,7 +33,7 @@ set hlsearch
 set showmatch
 
 " Wrap at 78 characters
-set textwidth=78
+set textwidth=120
 
 " Numer of spaces that a <TAB> in the file counts for.
 set ts=4
@@ -80,7 +80,7 @@ set formatoptions=tcr
 "=========================================================================
 " Status line
 " Make command line one line high
-set ch=1
+set ch=2
 
 " Handled by airline
 set noruler
@@ -118,15 +118,15 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 " unicode symbols for the status bar.
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.whitespace = 'Ξ'
 let g:airline#extensions#virtualenv#enabled = 1
+let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='light'
 
 "=========================================================================
 " Indent guides
@@ -135,8 +135,8 @@ let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 2
 let g:indent_guides_exclude_filetypes = ['nerdtree']
 let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd ctermbg=252
-hi IndentGuidesEven ctermbg=253
+hi IndentGuidesOdd ctermbg=248
+hi IndentGuidesEven ctermbg=243
 
 "=========================================================================
 " Automatically store a file the way I like it.
@@ -162,3 +162,43 @@ set wildmenu
 "
 autocmd CmdwinEnter * nnoremap <buffer> <F5> :let g:CmdWindowLineMark=line(".")<CR><CR>g::execute "normal ".g:CmdWindowLineMark."G"<CR>
 
+:map <C-Space> <C-u>
+:map <Space> <C-d>
+
+"========================================================================
+" Enable folding on code.
+" zo to open a fold, zO to open recursively
+" zc to close a fold, zC to close recursively
+" za to toggle fold, ZA to toggle recuseively
+" zm to close all folds in this file.
+" zr to open all folds in this file.
+"
+set foldmethod=syntax
+set foldlevelstart=20
+
+"========================================================================
+" Shows scons scripts with correct highlighting
+ autocmd BufRead,BufNewFile sconstruct set filetype=python
+ autocmd BufRead,BufNewFile SConscript set filetype=python
+ autocmd BufRead,BufNewFile *sconscript set filetype=python
+ autocmd BufRead,BufNewFile SConstruct set filetype=python
+
+"========================================================================
+" Allow using the mouse
+set mouse=a
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
+
+"========================================================================
+" format with clang
+map <C-k> :py3f /usr/share/clang/clang-format-10/clang-format.py<cr>
+imap <C-k> <c-o>:py3f /usr/share/clang/clang-format-10/clang-format.py<cr>
+
+function! Formatonsave()
+    let l:formatdiff = 1
+    py3f /usr/share/clang/clang-format-10/clang-format.py
+endfunction
+autocmd BufWritePre *.h,*.cc,*.cpp,*.c call Formatonsave()
