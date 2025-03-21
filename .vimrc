@@ -21,8 +21,8 @@ syntax enable
 " Use 256 colors
 set t_Co=256
 
-set background=dark
-colorscheme PaperColor
+set background=light
+colorscheme one
 
 "=========================================================================
 " Switch on search pattern highlighting
@@ -125,7 +125,7 @@ endif
 "let g:airline_symbols.paste = 'ρ'
 "let g:airline_symbols.whitespace = 'Ξ'
 let g:airline#extensions#virtualenv#enabled = 1
-let g:airline_theme='powerlineish'
+let g:airline_theme='onehalflight'
 let g:airline#extensions#tabline#enabled = 1
 
 "=========================================================================
@@ -194,11 +194,13 @@ end
 
 "========================================================================
 " format with clang
-map <C-k> :py3f /usr/share/clang/clang-format-10/clang-format.py<cr>
-imap <C-k> <c-o>:py3f /usr/share/clang/clang-format-10/clang-format.py<cr>
+map <C-k> :py3f /usr/share/clang/clang-format-14/clang-format.py<cr>
+imap <C-k> <c-o>:py3f /usr/share/clang/clang-format-14/clang-format.py<cr>
 
 function! Formatonsave()
     let l:formatdiff = 1
-    py3f /usr/share/clang/clang-format-10/clang-format.py
+    py3f /usr/share/clang/clang-format-14/clang-format.py
 endfunction
 autocmd BufWritePre *.h,*.cc,*.cpp,*.c call Formatonsave()
+
+hi Normal ctermbg=none guibg=NONE
